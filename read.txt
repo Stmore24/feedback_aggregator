@@ -1,0 +1,34 @@
+Customer Feedback System API
+Overview
+The Customer Feedback System API is a web application built using FastAPI and SQLAlchemy. It allows users to submit feedback on products, view feedback entries, and analyze customer ratings effectively. The API is designed to manage product feedback seamlessly and provides endpoints to handle product and feedback data.
+Key Features
+- **Product Management**: Initialize and manage products with unique product IDs.
+- **Feedback Submission**: Users can submit feedback entries, including scores and comments for each product.
+- **Data Retrieval**: Retrieve feedback entries, view all products, and calculate average ratings per product.
+- **Error Handling**: Comprehensive error handling for various situations, such as missing products or feedback entries.
+- **Static File Serving**: Serve static files such as HTML, CSS, and JavaScript for frontend interactions.
+Folder Structure
+```plaintext
+/
+├── static/
+│   ├── dashboard.html
+│   ├── feedback.html
+│   ├── index.html
+│   ├── script.js
+│   ├── style.css
+│   └── dashboard.js
+├── models.py
+├── main.py
+└── database.py
+API Endpoints
+GET /products/: Retrieve all products
+POST /feedback/: Submit a new feedback entry
+GET /feedback/: Retrieve all feedback entries
+GET /feedback/averages/: Retrieve average ratings for products
+GET /feedback/product/{product_id}: Retrieve feedback associated with a specific product
+DELETE /feedback/{feedback_id}: Delete a specific feedback entry
+Installation and Usage
+Clone the repository or create a new Repl in Replit.
+Install the required packages (FastAPI and SQLAlchemy).
+Run the app using the uvicorn main:app --host 0.0.0.0 --port 5000 command.
+Access the application via your Replit public URL.

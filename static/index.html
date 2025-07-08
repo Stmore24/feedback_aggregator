@@ -1,0 +1,228 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Feedback System</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        },
+                        secondary: {
+                            50: '#f8fafc',
+                            100: '#f1f5f9',
+                            200: '#e2e8f0',
+                            300: '#cbd5e1',
+                            400: '#94a3b8',
+                            500: '#64748b',
+                            600: '#475569',
+                            700: '#334155',
+                            800: '#1e293b',
+                            900: '#0f172a',
+                        },
+                        accent: {
+                            50: '#fef7ee',
+                            100: '#fdedd3',
+                            200: '#fbd6a5',
+                            300: '#f9b96d',
+                            400: '#f59132',
+                            500: '#f2740a',
+                            600: '#e35d05',
+                            700: '#bc4508',
+                            800: '#96360c',
+                            900: '#792d0d',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .pulse-animation {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: .5;
+            }
+        }
+    </style>
+</head>
+<body class="min-h-screen gradient-bg">
+    <div class="container mx-auto px-4 py-8 max-w-6xl">
+        <header class="text-center mb-12">
+            <!-- Logo Section -->
+            <div class="flex justify-center mb-6">
+                <div class="glass-effect rounded-full p-6 w-24 h-24 flex items-center justify-center">
+                    <svg class="w-12 h-12 text-white" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm3.5 6L12 10.5 8.5 8 12 5.5 15.5 8zM8.5 16L12 13.5 15.5 16 12 18.5 8.5 16z"/>
+                        <circle cx="12" cy="12" r="1.5"/>
+                    </svg>
+                </div>
+            </div>
+            
+            <h1 class="text-5xl md:text-6xl font-bold text-white mb-4 drop-shadow-lg">
+                Customer Feedback System
+            </h1>
+            <p class="text-white/90 text-xl font-medium drop-shadow">
+                Collect and analyze customer feedback efficiently
+            </p>
+        </header>
+
+        <!-- Tab Navigation -->
+        <div class="flex flex-wrap justify-center mb-8">
+            <div class="glass-effect rounded-2xl p-2 flex flex-wrap">
+                <button class="tab-button flex-1 min-w-0 px-6 py-4 text-sm font-semibold rounded-xl transition-all duration-300 text-white bg-primary-600 shadow-lg transform scale-105" onclick="showTab('submit')">
+                    <span class="hidden sm:inline">📝 Submit Feedback</span>
+                    <span class="sm:hidden">📝 Submit</span>
+                </button>
+                <button class="tab-button flex-1 min-w-0 px-6 py-4 text-sm font-semibold rounded-xl transition-all duration-300 text-white/80 hover:text-white hover:bg-white/20" onclick="showTab('view')">
+                    <span class="hidden sm:inline">👀 View Feedback</span>
+                    <span class="sm:hidden">👀 View</span>
+                </button>
+                <button class="tab-button flex-1 min-w-0 px-6 py-4 text-sm font-semibold rounded-xl transition-all duration-300 text-white/80 hover:text-white hover:bg-white/20" onclick="showTab('averages')">
+                    <span class="hidden sm:inline">📊 Product Averages</span>
+                    <span class="sm:hidden">📊 Averages</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Submit Feedback Tab -->
+        <div id="submit-tab" class="tab-content">
+            <div class="glass-effect rounded-3xl p-8 md:p-12 card-hover">
+                <div class="flex items-center mb-8">
+                    <div class="bg-primary-500 rounded-full p-3 mr-4">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+                        </svg>
+                    </div>
+                    <h2 class="text-3xl font-bold text-white">Submit New Feedback</h2>
+                </div>
+                
+                <form id="feedback-form" class="space-y-8">
+                    <div class="group">
+                        <label for="product-id" class="block text-sm font-semibold text-white/90 mb-3">
+                            🏷️ Product ID
+                        </label>
+                        <input type="text" id="product-id" required 
+                               class="w-full px-6 py-4 bg-white/20 border border-white/30 rounded-2xl text-white placeholder-white/60 focus:ring-4 focus:ring-primary-400/50 focus:border-primary-300 transition-all duration-300 backdrop-blur-sm"
+                               placeholder="Enter product identifier...">
+                    </div>
+                    
+                    <div class="group">
+                        <label for="score" class="block text-sm font-semibold text-white/90 mb-3">
+                            ⭐ Score (1-5)
+                        </label>
+                        <input type="number" id="score" min="1" max="5" step="0.1" required 
+                               class="w-full px-6 py-4 bg-white/20 border border-white/30 rounded-2xl text-white placeholder-white/60 focus:ring-4 focus:ring-primary-400/50 focus:border-primary-300 transition-all duration-300 backdrop-blur-sm"
+                               placeholder="Rate from 1 to 5...">
+                    </div>
+                    
+                    <div class="group">
+                        <label for="comment" class="block text-sm font-semibold text-white/90 mb-3">
+                            💬 Comment (Optional)
+                        </label>
+                        <textarea id="comment" rows="5" 
+                                  class="w-full px-6 py-4 bg-white/20 border border-white/30 rounded-2xl text-white placeholder-white/60 focus:ring-4 focus:ring-primary-400/50 focus:border-primary-300 transition-all duration-300 resize-none backdrop-blur-sm"
+                                  placeholder="Share your thoughts about the product..."></textarea>
+                    </div>
+                    
+                    <button type="submit" 
+                            class="w-full bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700 text-white font-bold py-5 px-8 rounded-2xl transition-all duration-300 transform hover:scale-105 hover:shadow-2xl focus:ring-4 focus:ring-primary-400/50">
+                        🚀 Submit Feedback
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- View Feedback Tab -->
+        <div id="view-tab" class="tab-content hidden">
+            <div class="glass-effect rounded-3xl p-8 md:p-12 card-hover">
+                <div class="flex items-center mb-8">
+                    <div class="bg-accent-500 rounded-full p-3 mr-4">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                        </svg>
+                    </div>
+                    <h2 class="text-3xl font-bold text-white">All Feedback</h2>
+                </div>
+                
+                <div class="flex flex-col sm:flex-row gap-4 mb-8">
+                    <input type="text" id="product-filter" placeholder="🔍 Filter by Product ID" 
+                           class="flex-1 px-6 py-4 bg-white/20 border border-white/30 rounded-2xl text-white placeholder-white/60 focus:ring-4 focus:ring-primary-400/50 focus:border-primary-300 transition-all duration-300 backdrop-blur-sm">
+                    <div class="flex gap-3">
+                        <button onclick="filterFeedback()" 
+                                class="px-8 py-4 bg-primary-500 hover:bg-primary-600 text-white font-semibold rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-lg">
+                            Filter
+                        </button>
+                        <button onclick="loadAllFeedback()" 
+                                class="px-8 py-4 bg-secondary-600 hover:bg-secondary-700 text-white font-semibold rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-lg">
+                            Show All
+                        </button>
+                    </div>
+                </div>
+                <div id="feedback-list" class="space-y-6"></div>
+            </div>
+        </div>
+
+        <!-- Product Averages Tab -->
+        <div id="averages-tab" class="tab-content hidden">
+            <div class="glass-effect rounded-3xl p-8 md:p-12 card-hover">
+                <div class="flex items-center mb-8">
+                    <div class="bg-accent-500 rounded-full p-3 mr-4">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                        </svg>
+                    </div>
+                    <h2 class="text-3xl font-bold text-white">Product Averages</h2>
+                </div>
+                <div id="averages-list" class="space-y-6"></div>
+            </div>
+        </div>
+
+        <!-- Toast Message -->
+        <div id="message" class="fixed top-6 right-6 z-50 transform translate-x-full transition-transform duration-500 ease-in-out"></div>
+    </div>
+
+    <script src="static/script.js"></script>
+</body>
+</html>
